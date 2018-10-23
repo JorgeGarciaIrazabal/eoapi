@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import React from 'react'
 
 interface ParameterProps {
   in: 'path' | 'query',
@@ -6,5 +6,8 @@ interface ParameterProps {
   type?: 'string' | 'number',
 }
 
-export default class Parameter extends Component<ParameterProps> {
-}
+const Parameter = (props: ParameterProps) => (
+  <eoapi-parameter {...props} />
+)
+
+export default Parameter

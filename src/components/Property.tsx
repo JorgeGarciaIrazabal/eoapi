@@ -1,11 +1,14 @@
-import { Component, ComponentType } from 'react'
+import React, { ComponentType } from 'react'
 
-interface PropertyProps {
+export interface PropertyProps {
   array?: boolean,
   name: string,
   type?: 'string' | 'number' | ComponentType<{}>,
   format?: 'email'
 }
 
-export default class Property extends Component<PropertyProps> {
-}
+const Property = (props: PropertyProps) => (
+  <eoapi-property {...props} />
+)
+
+export default Property

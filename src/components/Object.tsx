@@ -1,9 +1,12 @@
-import { Component, ReactElement } from 'react'
-import Property from './Property'
+import React, { ReactElement } from 'react'
+import { PropertyProps } from './Property'
 
 interface ObjectProps {
-  children?: Array<ReactElement<Property>>,
+  children?: Array<ReactElement<PropertyProps>>,
 }
 
-export default class OObject extends Component<ObjectProps> {
-}
+const OObject = (props: ObjectProps) => (
+  <eoapi-object {...props} />
+)
+
+export default OObject

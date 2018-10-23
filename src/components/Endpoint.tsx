@@ -1,12 +1,16 @@
-import { Component, ComponentType } from 'react'
+import React, { ComponentType } from 'react'
 
 type Method = 'post' | 'POST' | 'get' | 'GET'
 
-interface EndpointProps {
+export interface EndpointProps {
   path: string,
   method?: Method,
   body?: ComponentType<{}>,
+  children?: any,
 }
 
-export default class Endpoint extends Component<EndpointProps> {
-}
+const Endpoint = (props: EndpointProps) => (
+  <eoapi-endpoint {...props} />
+)
+
+export default Endpoint

@@ -1,9 +1,12 @@
-import { Component, ComponentType } from 'react'
+import React, { ComponentType } from 'react'
 
 interface ResponseProps {
   status: string | number,
   body?: ComponentType<{}>,
 }
 
-export default class Response extends Component<ResponseProps> {
-}
+const Response = (props: ResponseProps) => (
+  <eoapi-response {...props} />
+)
+
+export default Response
