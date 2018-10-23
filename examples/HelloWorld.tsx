@@ -1,5 +1,5 @@
 import React from 'react'
-import { Service, Endpoint, Parameter, Response, Object, Property, render } from '../src'
+import {API, Endpoint, Object, Parameter, Property, render, Response, Server, ServerVariable} from '../src'
 
 const WorkoutBasic = () => (
   <Object>
@@ -47,7 +47,18 @@ const SignInResponse = () => (
 // tslint:disable-next-line no-console
 console.log(
   render((
-    <Service>
+    <API
+      title="eoapi"
+      description="this is how you have to create api documentation!"
+    >
+      {/*
+        Add servers to the API, this replace `base-path` on openAPI 3.0
+        https://swagger.io/docs/specification/api-host-and-base-path/
+      */}
+      <Server url="{protocol}://{environment}.eoapi.com/v2">
+        <ServerVariable name="protocol" default="https" enum={['http', 'https']} />
+        <ServerVariable name="environment" default="prod" enum={['dev', 'prod', 'staging']} />
+      </Server>
       <Endpoint path="/workouts">
         <Response status="200" body={WorkoutBasicList} />
       </Endpoint>
@@ -58,6 +69,6 @@ console.log(
       <Endpoint path="/sign-in" method="POST" body={SignInRequest}>
         <Response status="200" body={SignInResponse} />
       </Endpoint>
-    </Service>
+    </API>
   ))
 )

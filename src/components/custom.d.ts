@@ -7,5 +7,8 @@ declare module JSX {
     'eoapi-property': any,
     'eoapi-response': any,
     'eoapi-service': any,
+    'eoapi-api': any,
+    'eoapi-server': any,
+    'eoapi-server-variable': any,
   }
 }
