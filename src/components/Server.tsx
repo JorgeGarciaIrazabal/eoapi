@@ -1,5 +1,5 @@
 import React, {ReactElement} from 'react'
-import {ServerVariableProps} from "./ServerVariable";
+import {ServerVariableProps} from './ServerVariable'
 
 /**
  * defines the server options (replacing basePath)
@@ -8,6 +8,7 @@ import {ServerVariableProps} from "./ServerVariable";
 export interface ServerProps {
   children?: Array<ReactElement<ServerVariableProps>>,
   url: string,
+  description?: string
 }
 
 const Server = (props: ServerProps) => (
