@@ -5,7 +5,7 @@ import {ServiceProps} from './Service'
 export interface APIProps {
   version: string,
   title: string,
-  children: Array<ReactElement<ServiceProps | EndpointProps>>,
+  children: Array<ReactElement<ServiceProps | EndpointProps>> | ReactElement<ServiceProps | EndpointProps>,
   description?: string,
   // todo consider using an object instead of contact_ prefix
   contact_name?: string

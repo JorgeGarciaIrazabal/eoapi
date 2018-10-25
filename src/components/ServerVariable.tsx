@@ -7,11 +7,13 @@ import React from 'react'
 export interface ServerVariableProps {
   name: string,
   default?: string,
-  enum?: Array<string>,
+  enum?: string[],
 }
 
-const ServerVariable = (props: ServerVariableProps) => (
-  <eoapi-server-variable {...props} />
-)
+const ServerVariable = (props: ServerVariableProps) => {
+  return (
+    <div />
+  )
+}
 
 export default ServerVariable

@@ -1,7 +1,7 @@
 import {ReactElement} from 'react'
 
 import {APIProps} from '../components/API'
-import {renderAPI} from './APIRender'
+import {renderAPI} from './api'
 import {safeDump} from 'js-yaml'
 
 const removeUndefined = (obj: any) => {
@@ -27,9 +27,9 @@ const removeUndefined = (obj: any) => {
 
 export function render(root: ReactElement<APIProps>): any {
   const {
-    apiJson,
+    output,
   } = renderAPI(root)
-  return removeUndefined(apiJson)
+  return removeUndefined(output)
 }
 
 export function renderToJson(root: ReactElement<APIProps>): string {

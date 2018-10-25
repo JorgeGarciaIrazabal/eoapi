@@ -6,7 +6,7 @@ import {ServerVariableProps} from './ServerVariable'
  * check openapi documentation: https://swagger.io/docs/specification/api-host-and-base-path/
  */
 export interface ServerProps {
-  children?: Array<ReactElement<ServerVariableProps>>,
+  children?: Array<ReactElement<ServerVariableProps>> | ReactElement<ServerVariableProps>,
   url: string,
   description?: string
 }

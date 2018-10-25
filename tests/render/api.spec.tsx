@@ -2,7 +2,7 @@ import {expect} from 'chai'
 import * as React from 'react'
 import 'mocha'
 import API from '../../src/components/API'
-import {render} from '../../src/render'
+import {render} from '../../src/renders'
 import Server from '../../src/components/Server'
 
 describe('Api render', () => {
@@ -13,7 +13,6 @@ describe('Api render', () => {
         version="1.0.0"
       >
         {/*It needs a children*/}
-        <Server url="my server" description="my description" />
         <Server url="my server" description="my description" />
       </API>
     )
@@ -38,8 +37,7 @@ describe('Api render', () => {
         license_name="Apache 2"
         license_url="https://test.com"
       >
-        <Server url="my server" description="my description" />
-        <Server url="my server" description="my description" />
+        <Server url="my2 server" description="my description" />
       </API>
     )
     const apiJson = render(api)

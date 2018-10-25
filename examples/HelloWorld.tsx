@@ -1,6 +1,6 @@
 import React from 'react'
 import {API, Endpoint, Object, Parameter, Property, Response, Server, ServerVariable} from '../src'
-import {render} from '../src/render'
+import {render} from '../src/renders'
 
 const WorkoutBasic = () => (
   <Object>
