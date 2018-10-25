@@ -1,4 +1,4 @@
-import React, { ComponentType } from 'react'
+import React, {ComponentType} from 'react'
 
 type Method = 'post' | 'POST' | 'get' | 'GET'
 
@@ -10,7 +10,7 @@ export interface EndpointProps {
 }
 
 const Endpoint = (props: EndpointProps) => (
-  <eoapi-endpoint {...props} />
+  <div {...props} />
 )
 
 export default Endpoint

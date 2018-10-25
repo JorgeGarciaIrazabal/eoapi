@@ -12,7 +12,7 @@ export interface ServerProps {
 }
 
 const Server = (props: ServerProps) => (
-  <eoapi-server {...props} />
+  <div {...props} />
 )
 
 export default Server

@@ -1,5 +1,6 @@
 import React from 'react'
-import {API, Endpoint, Object, Parameter, Property, render, Response, Server, ServerVariable} from '../src'
+import {API, Endpoint, Object, Parameter, Property, Response, Server, ServerVariable} from '../src'
+import {render} from '../src/render'
 
 const WorkoutBasic = () => (
   <Object>
@@ -50,6 +51,7 @@ console.log(
     <API
       title="eoapi"
       description="this is how you have to create api documentation!"
+      version="0.1.1"
     >
       {/*
         Add servers to the API, this replace `base-path` on openAPI 3.0

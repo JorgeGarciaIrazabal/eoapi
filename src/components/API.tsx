@@ -3,10 +3,10 @@ import {EndpointProps} from './Endpoint'
 import {ServiceProps} from './Service'
 
 export interface APIProps {
-  children?: Array<ReactElement<EndpointProps>> | Array<ReactElement<ServiceProps>>,
+  version: string,
+  title: string,
+  children: Array<ReactElement<ServiceProps | EndpointProps>>,
   description?: string,
-  version?: string,
-  title?: string,
   // todo consider using an object instead of contact_ prefix
   contact_name?: string
   contact_url?: string
@@ -16,7 +16,7 @@ export interface APIProps {
 }
 
 const API = (props: APIProps) => (
-  <eoapi-api {...props} />
+  <div {...props} />
 )
 
 export default API

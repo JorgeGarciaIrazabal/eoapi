@@ -10,9 +10,6 @@
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "baseUrl": "./src",
-    "types": [
-      "jest"
-    ],
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "sourceMap": true
