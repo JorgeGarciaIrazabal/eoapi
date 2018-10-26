@@ -5,7 +5,7 @@ import Server from '../../src/components/Server'
 import ServerVariable from '../../src/components/ServerVariable'
 import {renderServer} from '../../src/renders/server'
 
-describe('server render', () => {
+describe('Server render', () => {
   it('construct json with basic parameters', () => {
     const server = (
       <Server

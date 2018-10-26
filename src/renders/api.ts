@@ -2,7 +2,7 @@ import {ReactElement} from 'react'
 import {APIProps} from '../components/API'
 import {renderServer, ServerOutPut} from './server'
 import Server from '../components/Server'
-import {getChildrenArray} from '../arrayFormatters'
+import {getChildrenArray} from '../selectors'
 
 // import Endpoint from '../components/Endpoint'
 

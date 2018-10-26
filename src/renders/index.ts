@@ -3,26 +3,12 @@ import {ReactElement} from 'react'
 import {APIProps} from '../components/API'
 import {renderAPI} from './api'
 import {safeDump} from 'js-yaml'
+import {removeUndefined} from '../selectors'
 
-const removeUndefined = (obj: any) => {
-  if (Array.isArray(obj)) {
-    obj.forEach((item) => {
-      removeUndefined(item)
-    })
-  } else {
-    Object.keys(obj).forEach((key) => {
-      if (obj[key] && typeof obj[key] === 'object') {
-        obj[key] = removeUndefined(obj[key])
-      }
-      if (obj[key] === undefined || (Array.isArray(obj[key]) && obj[key].length === 0)) {
-        delete obj[key]
-      }
-    })
-    if (Object.keys(obj).length === 0) {
-      obj = undefined
-    }
-  }
-  return obj
+export interface OeapiContext {
+  version: string,
+  outputObj: { [key: string]: any } // todo: create an interface for this
+  routPaths?: string[],
 }
 
 export function render(root: ReactElement<APIProps>): any {

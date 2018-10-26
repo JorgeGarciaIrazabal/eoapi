@@ -1,7 +1,7 @@
 import {ReactElement} from 'react'
 import {ServerProps} from '../components/Server'
 import {ServerVariableProps} from '../components/ServerVariable'
-import {getChildrenArray} from '../arrayFormatters'
+import {getChildrenArray} from '../selectors'
 
 export interface ServerOutPut {
   url: string,
