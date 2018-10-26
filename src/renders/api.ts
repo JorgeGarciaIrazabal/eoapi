@@ -3,6 +3,7 @@ import {APIProps} from '../components/API'
 import {renderServer, ServerOutPut} from './server'
 import Server from '../components/Server'
 import {getChildrenArray} from '../selectors'
+import {OeapiContext} from './index'
 
 // import Endpoint from '../components/Endpoint'
 
@@ -26,7 +27,10 @@ export interface APIOutput {
 }
 
 export function renderAPI(root: ReactElement<APIProps>,
-                          context: { openapi?: string } = {}): { output: APIOutput, context: any } {
+                          context: OeapiContext = {
+                            version: '3.0.1',
+                            outputObj: {},
+                          }): { output: APIOutput, context: OeapiContext } {
   const servers: any[] = getChildrenArray(root).filter((child: any) => {
     return child.type === Server
   })
@@ -35,8 +39,8 @@ export function renderAPI(root: ReactElement<APIProps>,
   // })
 
   const output = {
-    openapi: context.openapi || '3.0.1',
-    servers: servers.map((server) => renderServer(server).output),
+    openapi: context.version || '3.0.1',
+    servers: servers.map((server) => renderServer(server, context).output),
     info: {
       description: root.props.description,
       version: root.props.version,

@@ -1,12 +1,18 @@
-import React, { ComponentType } from 'react'
+import React from 'react'
+import {modelOptions} from '../types'
 
-interface ResponseProps {
+// docs: https://swagger.io/docs/specification/describing-responses/
+export interface ResponseProps {
   status: string | number,
-  body?: ComponentType<{}>,
+  description?: string,
+  body?: modelOptions,
+  // ignored if body is defined.
+  oneOfBodies?: modelOptions[],
+  contentTypes?: string[],
 }
 
 const Response = (props: ResponseProps) => (
-  <eoapi-response {...props} />
+  <div />
 )
 
 export default Response

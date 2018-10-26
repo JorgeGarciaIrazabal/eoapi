@@ -1,4 +1,4 @@
-import React, { ComponentType } from 'react'
+import React, {ComponentType} from 'react'
 
 export interface PropertyProps {
   array?: boolean,
@@ -8,7 +8,7 @@ export interface PropertyProps {
 }
 
 const Property = (props: PropertyProps) => (
-  <eoapi-property {...props} />
+  <div />
 )
 
 export default Property
