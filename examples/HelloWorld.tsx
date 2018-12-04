@@ -1,6 +1,6 @@
 import React from 'react'
 import {API, Endpoint, Object, Parameter, Property, Response, Server, ServerVariable} from '../src'
-import {render} from '../src/renders'
+import {renderToYaml} from '../src/renders'
 
 const WorkoutBasic = () => (
   <Object>
@@ -47,7 +47,7 @@ const SignInResponse = () => (
 
 // tslint:disable-next-line no-console
 console.log(
-  render((
+  renderToYaml((
     <API
       title="eoapi"
       description="this is how you have to create api documentation!"
@@ -58,7 +58,7 @@ console.log(
         https://swagger.io/docs/specification/api-host-and-base-path/
       */}
       <Server url="{protocol}://{environment}.eoapi.com/v2">
-        <ServerVariable name="protocol" default="https" enum={['http', 'https']} />
+        <ServerVariable name="protocol" default="https" enum={['httpdsd', 'https']} />
         <ServerVariable name="environment" default="prod" enum={['dev', 'prod', 'staging']} />
       </Server>
       <Endpoint path="/workouts">
