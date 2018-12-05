@@ -32,8 +32,10 @@
   "scripts": {
     "build": "tsc -p ./",
     "test": "jest",
+    "compile-example": "node ./dist/scripts/ToYaml.js ../examples/HelloWorld",
     "refresh-swagger-ui": "node ./scripts/RefreshSwaggerUI.js",
-    "watch": "tsc-watch --onSuccess \"yarn refresh-swagger-ui\" --onFailure \"echo Beep! Compilation Failed\" --compiler typescript/bin/tsc",
+    "after-watch": "yarn compile-example | yarn refresh-swagger-ui",
+    "watch": "tsc-watch --onSuccess \"yarn after-watch\" --onFailure \"echo Beep! Compilation Failed\" --compiler typescript/bin/tsc",
     "start-server": "cd server && tsc-watch --onSuccess \"node ./dist/index.js\" --onFailure \"echo Beep! Compilation Failed\" --compiler typescript/bin/tsc"
   },
   "dependencies": {
