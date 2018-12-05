@@ -1,13 +1,13 @@
 import React from 'react'
-import {modelOptions} from '../types'
+import {SchemaType} from '../types'
 
 // docs: https://swagger.io/docs/specification/describing-responses/
 export interface ResponseProps {
   status: string | number,
   description?: string,
-  body?: modelOptions,
+  body?: SchemaType,
   // ignored if body is defined.
-  oneOfBodies?: modelOptions[],
+  oneOfBodies?: SchemaType[],
   contentTypes?: string[],
 }
 

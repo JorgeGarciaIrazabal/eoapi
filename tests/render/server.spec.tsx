@@ -15,7 +15,7 @@ describe('Server render', () => {
         <ServerVariable name="test" />
       </Server>
     )
-    const serverJson = renderServer(server).output
+    const serverJson = renderServer(server, {version: '1.0.0', outputObj: {}}).output
     expect(serverJson.description).to.eq('my description')
     expect(serverJson.url).to.eq('{protocol}://myurl.com')
     expect(Object.keys(serverJson.variables)).to.have.length(1)
@@ -31,7 +31,7 @@ describe('Server render', () => {
         <ServerVariable name="protocol" enum={protocols} />
       </Server>
     )
-    const serverJson = renderServer(server).output
+    const serverJson = renderServer(server, {version: '1.0.0', outputObj: {}}).output
     expect(serverJson.variables).to.have.property('protocol')
     expect(serverJson.variables.protocol).to.have.property('enum')
     expect(serverJson.variables.protocol.enum).to.eql(protocols)

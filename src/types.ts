@@ -19,17 +19,28 @@ export type typeOptions =
   | 'string'
   | 'boolean'
 
+export type mediaTypes =
+  'application/json'
+  | 'application/xml'
+  | 'text/plain'
+  | string
+
 export type typeOptionsOrComponent = typeOptions | ComponentType<{}>
 
 export type parameterInOptions = 'path' | 'query' | 'header' | 'cookie'
 
 export type modelOptions = string | number | boolean | any[] | ComponentType<{}>
 
-export interface SchemaOutput {
+export interface ResponseOutput {
   type?: typeOptionsOrComponent,
   minimum?: number,
   maximum?: number,
-  default?: modelOptions,
   format?: formatOptions,
   enum?: string[],
 }
+
+export interface SchemaOutput extends ResponseOutput {
+  default?: modelOptions,
+}
+
+export type SchemaType = SchemaOutput | ComponentType<{}>

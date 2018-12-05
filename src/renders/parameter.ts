@@ -1,7 +1,7 @@
 import {ReactElement} from 'react'
 import {OeapiContext} from './index'
 import {ParameterProps} from '../components/Parameter'
-import {parameterInOptions, SchemaOutput} from '../types'
+import {parameterInOptions, SchemaType} from '../types'
 import {extractSchemaFromProps} from '../selectors'
 
 export interface ParameterOutPut {
@@ -11,8 +11,8 @@ export interface ParameterOutPut {
   description?: string,
   deprecated?: boolean,
   // if content is provided, the schema will be included in it
-  content?: { [key: string]: { schema: SchemaOutput } },
-  schema?: SchemaOutput
+  content?: { [key: string]: { schema: SchemaType } },
+  schema?: SchemaType
   style?: string, // doc: https://swagger.io/docs/specification/serialization/
   explode?: boolean,
   nullable?: boolean,
@@ -21,9 +21,9 @@ export interface ParameterOutPut {
   example?: any,
 }
 
-export function renderParameter(server: ReactElement<ParameterProps>,
+export function renderParameter(parameter: ReactElement<ParameterProps>,
                                 context?: OeapiContext): { output: ParameterOutPut, context?: OeapiContext } {
-  const {props} = server
+  const {props} = parameter
 
   // todo: need to handle parameter when type is and object
 
