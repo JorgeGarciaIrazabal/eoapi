@@ -10,7 +10,7 @@ function isNull(obj: any) {
   return typeof obj === 'object' && obj !== null
 }
 
-export const removeUndefined = (obj: any) => {
+export function removeUndefined(obj: any) {
   if (Array.isArray(obj)) {
     obj = obj.map((item) => {
       return removeUndefined(item)
@@ -30,4 +30,15 @@ export const removeUndefined = (obj: any) => {
     }
   }
   return obj
+}
+
+export function extractSchemaFromProps(props: { [key: string]: any }) {
+  return {
+    type: props.type,
+    minimum: props.minimum,
+    maximum: props.maximum,
+    default: props.default,
+    format: props.format,
+    enum: props.enum,
+  }
 }

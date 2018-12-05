@@ -2,6 +2,7 @@ import {ReactElement} from 'react'
 import {ServerProps} from '../components/Server'
 import {ServerVariableProps} from '../components/ServerVariable'
 import {getChildrenArray} from '../selectors'
+import {OeapiContext} from './index'
 
 export interface ServerOutPut {
   url: string,
@@ -10,7 +11,7 @@ export interface ServerOutPut {
 }
 
 export function renderServer(server: ReactElement<ServerProps>,
-                             context: object = {}): { output: ServerOutPut, context: any } {
+                             context: OeapiContext): { output: ServerOutPut, context: OeapiContext } {
   const output = {
     url: server.props.url,
     description: server.props.description,
