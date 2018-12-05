@@ -7,6 +7,11 @@
   "rules": {
     "quotemark": [true, "single", "jsx-double"],
     "semicolon": [true, "never"],
+    "no-console": [
+      false,
+      "log",
+      "error"
+    ],
     "trailing-comma": [true, {
       "singleline": "never",
       "multiline": {

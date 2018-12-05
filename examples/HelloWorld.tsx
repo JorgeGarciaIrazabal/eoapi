@@ -1,6 +1,5 @@
 import React from 'react'
 import {API, Endpoint, Object, Parameter, Property, Response, Server, ServerVariable} from '../src'
-import {render} from '../src/renders'
 
 const WorkoutBasic = () => (
   <Object>
@@ -46,31 +45,29 @@ const SignInResponse = () => (
 )
 
 // tslint:disable-next-line no-console
-console.log(
-  render((
-    <API
-      title="eoapi"
-      description="this is how you have to create api documentation!"
-      version="0.1.1"
-    >
-      {/*
+export default (
+  <API
+    title="eoapi"
+    description="this is how you have to create api documentation!"
+    version="0.1.1"
+  >
+    {/*
         Add servers to the API, this replace `base-path` on openAPI 3.0
         https://swagger.io/docs/specification/api-host-and-base-path/
       */}
-      <Server url="{protocol}://{environment}.eoapi.com/v2">
-        <ServerVariable name="protocol" default="https" enum={['http', 'https']} />
-        <ServerVariable name="environment" default="prod" enum={['dev', 'prod', 'staging']} />
-      </Server>
-      <Endpoint path="/workouts">
-        <Response status="200" body={WorkoutBasicList} />
-      </Endpoint>
-      <Endpoint path="/workouts/{id}">
-        <Parameter in="path" name="id" type="string" />
-        <Response status="200" body={WorkoutBasicList} />
-      </Endpoint>
-      <Endpoint path="/sign-in" method="POST" body={SignInRequest}>
-        <Response status="200" body={SignInResponse} />
-      </Endpoint>
-    </API>
-  ))
+    <Server url="{protocol}://{environment}.eoapi.com/v2">
+      <ServerVariable name="protocol" default="https" enum={['http', 'https']} />
+      <ServerVariable name="environment" default="dev" enum={['dev', 'prod', 'staging']} />
+    </Server>
+    <Endpoint path="/workouts">
+      <Response status="200" body={WorkoutBasicList} />
+    </Endpoint>
+    <Endpoint path="/workouts/{id}">
+      <Parameter in="path" name="id" type="string" />
+      <Response status="200" body={WorkoutBasicList} />
+    </Endpoint>
+    <Endpoint path="/sign-in" method="POST" body={SignInRequest}>
+      <Response status="200" body={SignInResponse} />
+    </Endpoint>
+  </API>
 )

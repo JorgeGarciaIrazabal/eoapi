@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<script>
+    var exampleSocket = new WebSocket("ws://localhost:3000");
+    exampleSocket.onmessage = function (event) {
+        if (event.data === 'refresh') {
+            location.reload();
+        }
+    }
+</script>
+<iframe src="/sui" width="100%" height="100%"></iframe>
+</body>
+</html>
