@@ -8,7 +8,15 @@ import {removeUndefined} from '../selectors'
 export interface OeapiContext {
   version: string,
   outputObj: { [key: string]: any } // todo: create an interface for this
-  routPaths?: string[],
+  routPaths: string[],
+}
+
+export function getEmptyContext(): OeapiContext {
+  return {
+    version: '1.0.0',
+    outputObj: {components: {}},
+    routPaths: [],
+  }
 }
 
 export function render(root: ReactElement<APIProps>): any {

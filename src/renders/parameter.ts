@@ -1,8 +1,8 @@
 import {ReactElement} from 'react'
-import {OeapiContext} from './index'
+import {getEmptyContext, OeapiContext} from './index'
 import {ParameterProps} from '../components/Parameter'
 import {parameterInOptions, SchemaType} from '../types'
-import {extractSchemaFromProps} from '../selectors'
+import {extractSwaggerSchema} from '../selectors'
 
 export interface ParameterOutPut {
   in: parameterInOptions,
@@ -21,13 +21,18 @@ export interface ParameterOutPut {
   example?: any,
 }
 
-export function renderParameter(parameter: ReactElement<ParameterProps>,
-                                context?: OeapiContext): { output: ParameterOutPut, context?: OeapiContext } {
+export function renderParameter(
+  parameter: ReactElement<ParameterProps>,
+  context: OeapiContext = getEmptyContext()
+): { output: ParameterOutPut, context?: OeapiContext } {
   const {props} = parameter
 
   // todo: need to handle parameter when type is and object
 
-  const schema = extractSchemaFromProps(props)
+  const {
+    schema,
+    context: newContext,
+  } = extractSwaggerSchema(props, context)
   const output: ParameterOutPut = {
     in: props.in,
     name: props.name,
@@ -48,5 +53,5 @@ export function renderParameter(parameter: ReactElement<ParameterProps>,
     allowReserved: props.allowReserved,
     example: props.example,
   }
-  return {output, context}
+  return {output, context: newContext}
 }

@@ -3,6 +3,7 @@ import * as React from 'react'
 import 'mocha'
 import Response from '../../src/components/Response'
 import {renderResponse} from '../../src/renders/response'
+import {getEmptyContext} from '../../src/renders'
 
 describe('Response render', () => {
   it('Response with body and description', () => {
@@ -16,7 +17,7 @@ describe('Response render', () => {
         description="dd"
       />
     )
-    const responseJson = renderResponse(response, {version: '1.0.0', outputObj: {}}).output['200']
+    const responseJson = renderResponse(response, getEmptyContext()).output['200']
 
     expect(responseJson.description).to.eq('dd')
     expect(responseJson.content).to.have.property('application/json')
@@ -49,7 +50,7 @@ describe('Response render', () => {
         description="dd"
       />
     )
-    const responseJson = renderResponse(response, {version: '1.0.0', outputObj: {}}).output['200']
+    const responseJson = renderResponse(response, getEmptyContext()).output['200']
 
     expect(responseJson.description).to.eq('dd')
     expect(responseJson.content).to.have.property('application/json')

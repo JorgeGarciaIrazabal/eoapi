@@ -1,8 +1,8 @@
 import {ReactElement} from 'react'
-import {OeapiContext} from './index'
+import {getEmptyContext, OeapiContext} from './index'
 import {ResponseProps} from '../components/Response'
 import {SchemaType} from '../types'
-import {extractSchemaFromProps} from '../selectors'
+import {extractSwaggerSchema} from '../selectors'
 
 export interface Content {
   [key: string]: {
@@ -18,15 +18,24 @@ export interface ResponseOutput {
   }
 }
 
-export function renderResponse(response: ReactElement<ResponseProps>,
-                               context?: OeapiContext): { output: ResponseOutput, context?: OeapiContext } {
+export function renderResponse(
+  response: ReactElement<ResponseProps>,
+  context: OeapiContext = getEmptyContext()
+): { output: ResponseOutput, context?: OeapiContext } {
   const {props} = response
   const contents: Content = {}
+  let newContext = {...context}
 
   if (props.body && props.contentTypes) {
+    const body = props.body as SchemaType
     props.contentTypes.forEach((contentType: string) => {
+      const {
+        schema,
+        context: subNewContext,
+      } = extractSwaggerSchema(body, newContext)
+      newContext = subNewContext
       contents[contentType] = {
-        schema: extractSchemaFromProps(props.body || {}),
+        schema,
       }
     })
   } else if (props.oneOfBodies && props.contentTypes) {
@@ -34,7 +43,12 @@ export function renderResponse(response: ReactElement<ResponseProps>,
       contents[contentType] = {
         schema: {
           oneOf: (props.oneOfBodies || []).map((body) => {
-            return extractSchemaFromProps(body || {})
+            const {
+              schema,
+              context: subNewContext,
+            } = extractSwaggerSchema(body, newContext)
+            newContext = subNewContext
+            return schema
           }),
         },
       }

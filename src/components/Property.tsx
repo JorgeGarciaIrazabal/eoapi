@@ -1,10 +1,8 @@
-import React, {ComponentType} from 'react'
+import React from 'react'
+import {SchemaOutput} from '../types'
 
-export interface PropertyProps {
-  array?: boolean,
+export interface PropertyProps extends SchemaOutput {
   name: string,
-  type?: 'string' | 'number' | ComponentType<{}>,
-  format?: 'email'
 }
 
 const Property = (props: PropertyProps) => (

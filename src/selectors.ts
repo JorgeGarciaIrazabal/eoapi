@@ -1,4 +1,6 @@
 import {ReactElement} from 'react'
+import {SchemaOutput, SchemaType} from './types'
+import {OeapiContext} from './renders'
 
 export function getChildrenArray(component: ReactElement<any>): Array<ReactElement<any>> {
   return Array.isArray(component.props.children) ?
@@ -32,13 +34,42 @@ export function removeUndefined(obj: any) {
   return obj
 }
 
-export function extractSchemaFromProps(props: { [key: string]: any }) {
-  return {
-    type: props.type,
-    minimum: props.minimum,
-    maximum: props.maximum,
-    default: props.default,
-    format: props.format,
-    enum: props.enum,
+export function extractSwaggerSchema(
+  props: SchemaType,
+  context: OeapiContext
+): { schema: SchemaType, context: OeapiContext } {
+  const schema = props as SchemaOutput
+  if (schema.type) {
+    if (typeof schema.type === 'string') {
+      return {
+        schema: {
+          type: schema.type,
+          minimum: schema.minimum,
+          maximum: schema.maximum,
+          default: schema.default,
+          format: schema.format,
+          enum: schema.enum,
+        },
+        context,
+      }
+    } else {
+      return extractSwaggerSchema(schema.type as SchemaType, context)
+    }
+  } else {
+    const component = props as () => ReactElement<any>
+    const propertyObjects = getChildrenArray(component())
+    let newContext = {...context}
+    const finalProps = propertyObjects.reduce(
+      (obj: any, child: ReactElement<any>) => {
+        const {schema: newSchema, context: subNewContext} = extractSwaggerSchema(child.props, context)
+        newContext = subNewContext
+        obj[child.props.name] = newSchema
+        return obj
+      }, {})
+    newContext.outputObj.components[component.name] = {
+      type: 'object',
+      properties: finalProps,
+    }
+    return {schema: {$ref: '#/components/' + component.name}, context: newContext}
   }
 }

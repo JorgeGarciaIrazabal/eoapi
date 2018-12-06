@@ -31,16 +31,15 @@ export type parameterInOptions = 'path' | 'query' | 'header' | 'cookie'
 
 export type modelOptions = string | number | boolean | any[] | ComponentType<{}>
 
-export interface ResponseOutput {
-  type?: typeOptionsOrComponent,
+export interface SchemaOutput {
+  array?: boolean,
+  type: typeOptionsOrComponent,
   minimum?: number,
   maximum?: number,
   format?: formatOptions,
   enum?: string[],
-}
-
-export interface SchemaOutput extends ResponseOutput {
   default?: modelOptions,
+  pattern?: string,
 }
 
-export type SchemaType = SchemaOutput | ComponentType<{}>
+export type SchemaType = SchemaOutput | ComponentType<{}> | { $ref: string }

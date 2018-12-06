@@ -1,6 +1,10 @@
 import {expect} from 'chai'
 import 'mocha'
-import {removeUndefined} from '../src/selectors'
+import {extractSwaggerSchema, removeUndefined} from '../src/selectors'
+import Object from '../src/components/Object'
+import Property from '../src/components/Property'
+import React from 'react'
+import {getEmptyContext} from '../src/renders'
 
 describe('RemoveUndefined', () => {
   it('object with undefined values in the root are removed', () => {
@@ -58,6 +62,73 @@ describe('RemoveUndefined', () => {
         a3: [
           null,
         ],
+      },
+    })
+  })
+})
+
+describe('extractSwaggerSchema', () => {
+  it('object with multiple properties gets constructed', () => {
+    const UserDetails = () => (
+      <Object>
+        <Property name="id" type="string" />
+        <Property name="email" type="string" format="email" />
+      </Object>
+    )
+    const {
+      context,
+      schema,
+    } = extractSwaggerSchema(UserDetails, getEmptyContext())
+    expect(schema).to.deep.equal({
+      $ref: '#/components/UserDetails',
+    })
+    expect(removeUndefined(context.outputObj.components.UserDetails)).to.deep.equal({
+      type: 'object',
+      properties: {
+        id: {
+          type: 'string',
+        },
+        email: {
+          type: 'string',
+          format: 'email',
+        },
+      },
+    })
+  })
+
+  it('object with nested objects is extracted correctly', () => {
+    const UserDetails = () => (
+      <Object>
+        <Property name="id" type="string" />
+        <Property name="email" type="string" format="email" />
+      </Object>
+    )
+    const SignInResponse = () => (
+      <Object>
+        <Property name="user" type={UserDetails} />
+        <Property name="token" type="string" />
+      </Object>
+    )
+    const {
+      context,
+      schema,
+    } = extractSwaggerSchema(SignInResponse, getEmptyContext())
+    expect(schema).to.deep.equal({
+      $ref: '#/components/SignInResponse',
+    })
+    expect(context.outputObj.components.SignInResponse.properties.user).to.deep.equal({
+      $ref: '#/components/UserDetails',
+    })
+    expect(removeUndefined(context.outputObj.components.UserDetails)).to.deep.equal({
+      type: 'object',
+      properties: {
+        id: {
+          type: 'string',
+        },
+        email: {
+          type: 'string',
+          format: 'email',
+        },
       },
     })
   })
