@@ -111,7 +111,7 @@ describe('Api render', () => {
           <ServerVariable name="environment" default="dev" enum={['dev', 'prod', 'staging']} />
         </Server>
         <Endpoint path="/workouts" method="GET">
-          <Parameter in="path" name="id" array type="string" description="this is great" />
+          <Parameter in="query" name="id" array type="string" description="this is great" />
           <Response status="200" body={WorkoutBasicList} contentTypes={['application/json']} />
         </Endpoint>
         <Endpoint path="/workouts/{id}" method="GET">
