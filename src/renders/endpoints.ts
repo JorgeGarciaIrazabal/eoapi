@@ -5,6 +5,8 @@ import {EndpointProps} from '../components/Endpoint'
 import {ResponseProps} from '../components/Response'
 import {renderResponse} from './response'
 import {Response} from '../'
+import Parameter from '../components/Parameter'
+import {renderParameter} from './parameter'
 
 export interface ServerOutPut {
   [key: string]: { // path
@@ -24,6 +26,9 @@ export function renderEndpoint(
   const responses: any[] = getChildrenArray(endpoint).filter((child: any) => {
     return child.type === Response
   })
+  const parameters: any[] = getChildrenArray(endpoint).filter((child: any) => {
+    return child.type === Parameter
+  })
   let newContext = {...context}
   const endpointOutput = {
     [endpoint.props.path]: {
@@ -39,6 +44,12 @@ export function renderEndpoint(
               ...output,
             }
           }, {}),
+        parameters: parameters.map(
+          (parameter) => {
+            const {output, context: subNewContext} = renderParameter(parameter, context)
+            newContext = subNewContext
+            return output
+          }),
       },
     },
   }

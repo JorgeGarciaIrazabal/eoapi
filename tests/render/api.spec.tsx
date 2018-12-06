@@ -9,6 +9,7 @@ import Endpoint from '../../src/components/Endpoint'
 import Response from '../../src/components/Response'
 import Object from '../../src/components/Object'
 import Property from '../../src/components/Property'
+import Parameter from '../../src/components/Parameter'
 
 describe('Api render', () => {
   it('construct json with basic parameters', () => {
@@ -58,6 +59,14 @@ describe('Api render', () => {
         <Property name="name" type="string" />
       </Object>
     )
+
+    const UserDetails = () => (
+      <Object>
+        <Property name="id" type="string" />
+        <Property name="email" type="string" format="email" />
+      </Object>
+    )
+
     const Pagination = () => (
       <Object>
         <Property name="page_index" type="number" />
@@ -70,6 +79,20 @@ describe('Api render', () => {
       <Object>
         <Property name="items" array type={WorkoutBasic} />
         <Property name="pagination" type={Pagination} />
+      </Object>
+    )
+
+    const SignInRequest = () => (
+      <Object>
+        <Property name="email" type="string" format="email" />
+        <Property name="password" type="string" />
+      </Object>
+    )
+
+    const SignInResponse = () => (
+      <Object>
+        <Property name="user" type={UserDetails} />
+        <Property name="token" type="string" />
       </Object>
     )
     const api = (
@@ -89,6 +112,13 @@ describe('Api render', () => {
         </Server>
         <Endpoint path="/workouts" method="GET">
           <Response status="200" body={WorkoutBasicList} contentTypes={['application/json']} />
+        </Endpoint>
+        <Endpoint path="/workouts/{id}" method="GET">
+          <Parameter in="path" name="id" type="string" description="this is great" />
+          <Response status="200" body={WorkoutBasicList} contentTypes={['application/json']} />
+        </Endpoint>
+        <Endpoint path="/sign-in" method="POST" body={SignInRequest}>
+          <Response status="200" body={SignInResponse} contentTypes={['application/json']} />
         </Endpoint>
       </API>
     )

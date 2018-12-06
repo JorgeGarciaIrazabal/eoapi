@@ -1,8 +1,7 @@
 import React, {ReactElement} from 'react'
-import {PropertyProps} from './Property'
 
 interface ObjectProps {
-  children?: Array<ReactElement<PropertyProps>>,
+  children?: Array<ReactElement<any>> | ReactElement<any>,
 }
 
 const OObject = (props: ObjectProps) => (

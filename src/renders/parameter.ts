@@ -24,7 +24,7 @@ export interface ParameterOutPut {
 export function renderParameter(
   parameter: ReactElement<ParameterProps>,
   context: OeapiContext = getEmptyContext()
-): { output: ParameterOutPut, context?: OeapiContext } {
+): { output: ParameterOutPut, context: OeapiContext } {
   const {props} = parameter
 
   // todo: need to handle parameter when type is and object

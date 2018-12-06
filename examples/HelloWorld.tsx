@@ -22,11 +22,16 @@ const Pagination = () => (
     <Property name="total" type="number" />
   </Object>
 )
+const InsideProperties = () => (
+  <>
+    <Property name="items" array type={WorkoutBasic} />
+    <Property name="pagination" type={Pagination} />
+  </>
+)
 
 const WorkoutBasicList = () => (
   <Object>
-    <Property name="items" array type={WorkoutBasic} />
-    <Property name="pagination" type={Pagination} />
+    <InsideProperties />
   </Object>
 )
 
@@ -63,7 +68,8 @@ export default (
       <Response status="200" body={WorkoutBasicList} contentTypes={['application/json']} />
     </Endpoint>
     <Endpoint path="/workouts/{id}" method="GET">
-      <Parameter in="path" name="id" type="string" />
+      <Parameter in="path" name="id" type="string" description="this is great" />
+      <Parameter in="path" name="aux" type="string" description="this is great" deprecated />
       <Response status="200" body={WorkoutBasicList} contentTypes={['application/json']} />
     </Endpoint>
     <Endpoint path="/sign-in" method="POST" body={SignInRequest}>
