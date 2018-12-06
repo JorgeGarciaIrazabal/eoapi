@@ -4,6 +4,9 @@ import {renderServer, ServerOutPut} from './server'
 import Server from '../components/Server'
 import {getChildrenArray} from '../selectors'
 import {getEmptyContext, OeapiContext} from './index'
+import Endpoint from '../components/Endpoint'
+import deepmerge from 'deepmerge'
+import {renderEndpoint} from './endpoints'
 
 // import Endpoint from '../components/Endpoint'
 
@@ -31,11 +34,12 @@ export function renderAPI(root: ReactElement<APIProps>,
   const servers: any[] = getChildrenArray(root).filter((child: any) => {
     return child.type === Server
   })
-  // const endpoints: any[] = root.props.children.filter((child: any) => {
-  //   return child.type === Endpoint
-  // })
+  const endpoints: any[] = getChildrenArray(root).filter((child: any) => {
+    return child.type === Endpoint
+  })
+  let newContext = {...context}
 
-  const output = {
+  const apiOutput = {
     openapi: context.version || '3.0.1',
     servers: servers.map((server) => renderServer(server, context).output),
     info: {
@@ -52,7 +56,11 @@ export function renderAPI(root: ReactElement<APIProps>,
         url: root.props.license_url,
       },
     },
-    paths: [],
+    paths: endpoints.reduce((obj: any, endpoint: any) => {
+      const {output, context: subNewContext} = renderEndpoint(endpoint, newContext)
+      newContext = subNewContext
+      return deepmerge(obj, output)
+    }, {}),
   }
-  return {output, context}
+  return {output: apiOutput, context: newContext}
 }

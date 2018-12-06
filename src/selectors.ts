@@ -66,10 +66,10 @@ export function extractSwaggerSchema(
         obj[child.props.name] = newSchema
         return obj
       }, {})
-    newContext.outputObj.components[component.name] = {
+    newContext.outputObj.components.schemas[component.name] = {
       type: 'object',
       properties: finalProps,
     }
-    return {schema: {$ref: '#/components/' + component.name}, context: newContext}
+    return {schema: {$ref: '#/components/schemas/' + component.name}, context: newContext}
   }
 }

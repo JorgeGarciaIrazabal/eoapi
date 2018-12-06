@@ -13,8 +13,8 @@ export interface OeapiContext {
 
 export function getEmptyContext(): OeapiContext {
   return {
-    version: '1.0.0',
-    outputObj: {components: {}},
+    version: '3.0.1',
+    outputObj: {components: {schemas: {}}},
     routPaths: [],
   }
 }
@@ -22,8 +22,9 @@ export function getEmptyContext(): OeapiContext {
 export function render(root: ReactElement<APIProps>): any {
   const {
     output,
+    context,
   } = renderAPI(root)
-  return removeUndefined(output)
+  return removeUndefined({...output, ...context.outputObj})
 }
 
 export function renderToJson(root: ReactElement<APIProps>): string {

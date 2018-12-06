@@ -21,7 +21,7 @@ export interface ResponseOutput {
 export function renderResponse(
   response: ReactElement<ResponseProps>,
   context: OeapiContext = getEmptyContext()
-): { output: ResponseOutput, context?: OeapiContext } {
+): { output: ResponseOutput, context: OeapiContext } {
   const {props} = response
   const contents: Content = {}
   let newContext = {...context}

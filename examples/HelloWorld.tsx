@@ -59,15 +59,15 @@ export default (
       <ServerVariable name="protocol" default="https" enum={['http', 'https']} />
       <ServerVariable name="environment" default="dev" enum={['dev', 'prod', 'staging']} />
     </Server>
-    <Endpoint path="/workouts">
-      <Response status="200" body={WorkoutBasicList} />
+    <Endpoint path="/workouts" method="GET">
+      <Response status="200" body={WorkoutBasicList} contentTypes={['application/json']} />
     </Endpoint>
-    <Endpoint path="/workouts/{id}">
+    <Endpoint path="/workouts/{id}" method="GET">
       <Parameter in="path" name="id" type="string" />
-      <Response status="200" body={WorkoutBasicList} />
+      <Response status="200" body={WorkoutBasicList} contentTypes={['application/json']} />
     </Endpoint>
     <Endpoint path="/sign-in" method="POST" body={SignInRequest}>
-      <Response status="200" body={SignInResponse} />
+      <Response status="200" body={SignInResponse} contentTypes={['application/json']} />
     </Endpoint>
   </API>
 )
