@@ -8,6 +8,7 @@ export interface ParameterProps {
   required?: boolean,
   description?: string,
   deprecated?: boolean,
+  array?: boolean,
   type: typeOptionsOrComponent,
   contentType?: string,
   style?: string, // doc: https://swagger.io/docs/specification/serialization/
