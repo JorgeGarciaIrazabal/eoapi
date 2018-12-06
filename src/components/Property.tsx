@@ -1,7 +1,7 @@
 import React from 'react'
-import {SchemaOutput} from '../types'
+import {SchemaProperty} from '../types'
 
-export interface PropertyProps extends SchemaOutput {
+export interface PropertyProps extends SchemaProperty {
   name: string,
 }
 

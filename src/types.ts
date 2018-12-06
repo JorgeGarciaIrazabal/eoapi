@@ -18,6 +18,7 @@ export type typeOptions =
   | 'number'
   | 'string'
   | 'boolean'
+  | 'array'
 
 export type mediaTypes =
   'application/json'
@@ -31,7 +32,7 @@ export type parameterInOptions = 'path' | 'query' | 'header' | 'cookie'
 
 export type modelOptions = string | number | boolean | any[] | ComponentType<{}>
 
-export interface SchemaOutput {
+export interface SchemaProperty {
   array?: boolean,
   type: typeOptionsOrComponent,
   minimum?: number,
@@ -40,6 +41,7 @@ export interface SchemaOutput {
   enum?: string[],
   default?: modelOptions,
   pattern?: string,
+  items?: any
 }
 
-export type SchemaType = SchemaOutput | ComponentType<{}> | { $ref: string }
+export type SchemaType = SchemaProperty | ComponentType<{}> | { $ref: string }
